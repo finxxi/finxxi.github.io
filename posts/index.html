@@ -1,0 +1,39 @@
+---
+layout: post-index
+title: 按时间归类文章
+description: "按时间归类文章"
+comments: false
+image:
+  feature: time_bg.jpg
+---
+
+{% for post in site.posts %}
+{% capture this_year %}{{ post.date | date: "%Y-%m" }}{% endcapture %}
+{% capture next_year %}{{ post.previous.date | date: "%Y-%m" }}{% endcapture %}
+
+{% if forloop.first %}
+<article>
+  <h2 id="{{ this_year }}-ref">{{ this_year }}</h2>
+  <ul>
+    {% endif %}
+
+    <li class="entry-content">
+      <a href="{{ site.url }}{{ post.url }}" title="{{ post.title }}">
+        {{ post.title }}
+        <span style="float: right">{% include read-time-index.html %}</span>
+      </a>
+    </li>
+
+    {% if forloop.last %}
+  </ul>
+</article>
+{% else %}
+{% if this_year != next_year %}
+  </ul>
+</article>
+<article>
+  <h2 id="{{ next_year }}-ref" class="year-heading">{{next_year}}</h2>
+  <ul>
+    {% endif %}
+    {% endif %}
+    {% endfor %}

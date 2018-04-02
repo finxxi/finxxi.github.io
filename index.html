@@ -1,0 +1,25 @@
+---
+layout: post-index
+title: 学习芬兰语，每天进步一点点~
+description: "article list"
+tags:
+comments: false
+image:
+  feature: home_bg.jpg
+---
+
+<article class="hentry">
+  {% for post in paginator.posts %}
+  <ul>
+    <li class="entry-content">
+      <a href="{{ site.url }}{{ post.url }}" title="{{ post.title }}">
+        (<time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%m-%d"  }}</time>)
+        {{ post.title }}
+        <span style="float: right">{% include read-time-index.html %}</span>
+      </a>
+    </li>
+  </ul>
+  {% endfor %}
+</article>
+
+{% include pagination.html %}
